@@ -45,3 +45,9 @@ The output figure provides:
 - (bottom) plot of the optimized signal ((if gaussian profile: weighted) mean intensity within ROI), and of the peak intensity within this ROI
 
 ![image.png](./image.png)
+
+# To do
+- add Lorentzian weighting
+- add transmission matrix measurement and focusing
+- connect to k-wave to better simulate the acoustic part
+- convert to jupyter notebook
