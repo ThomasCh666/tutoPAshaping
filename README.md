@@ -4,7 +4,7 @@ This repository contains a Matlab code that simulates the optimisation of the me
 
 The simulated physical configuration is the following: 
 
-- an flat-phase optical wavefront is impinging on a spatial light modulator (SLM) (phase modulation only).
+- a flat-phase optical wavefront is impinging on a spatial light modulator (SLM) (phase modulation only).
 - a camera is located the far-field/Fourier plane of the SLM and measures the light intensity of the produced speckle
 
 Light focusing is attempted by shaping the phase pattern displayed on the SLM. The optimized signal is the averaged light intensity within a given region of interest (ROI), eventually with some non-linearity. The ROI can be a disk, a square, or a gaussian weighted profile (so not really a ROI in this case).
