@@ -19,7 +19,7 @@ upd_bar = textprogressbar21(n_step, 'barlength', 20, 'updatestep', 1, 'startmsg'
     'showbar', false, 'showremtime', true, 'showactualnum', true, 'barsymbol', '=','emptybarsymbol', '-');
 
 n_phase=3;
-s=zeros(grid1Size,grid1Size,1); %stocke tous les speckles successifs
+s=zeros(grid1Size,grid1Size,1); % stores all successive speckle patterns
 NL_coef=1;
 
 diskFlag = 0;
@@ -90,8 +90,9 @@ for imed=1:n_med
     pad=zeros(grid1Size);
     
     for k=2:n_step
+        % pixchoice = zeros(SLMsize,SLMsize); pixchoice(k) = 1; % pixel by pixel 
         % pixchoice=rand(SLMsize)>0.5; % random pixel selection
-        pixchoice=reshape(Hada(mod(k,2^nextpow2(SLMsize.^2))+1,1:(SLMsize^2)),SLMsize,SLMsize).;
+        pixchoice=reshape(Hada(mod(k,2^nextpow2(SLMsize.^2))+1,1:(SLMsize^2)),SLMsize,SLMsize); % Hadamard basis
         
         for n=1:n_phase
             Delta_n(:,:,k) = mod(Delta_n(:,:,k-1) + pixchoice*(n-1),n_phase); % ramp the phase of chosen pixels only
@@ -131,9 +132,9 @@ end
 % circlem=(g<=0.55*max(g(:)));
 % c=(circlep+circlem)==2;
 
-figure(1),
-subplot(221), imagesc(s(:,:,1)), axis image,colormap jet,set(gca,'visible','off')
-
+figure(1), clf
+subplot(221), imagesc(s(:,:,1)/max(sd(:)),[0 1]), axis image,colormap jet,set(gca,'visible','off')
+colorbar
 h = drawcircle('Center',.5*[size(sd,1), size(sd,2)],'Radius',radius,...
     'linewidth',1,'StripeColor','white','InteractionsAllowed','none');
 
@@ -141,25 +142,32 @@ subplot(222), imagesc(sd/max(sd(:)),[0 1]), axis image ,colormap jet,set(gca,'vi
 % subplot(133), imagesc(sdd/max(sd(:)),[0 1]), axis image,set(gca,'visible','off')
 % plot(max(optVal)/mean2(s1),'linewidth',3), axis tight, ylim([0 max(optVal(:))/mean2(s1)+10])
 colormap hot
-
-xlabel('Steps')
-ylabel('Enhancement factor')
+colorbar
+annotation('textbox', [0.5, 0.5, 0.1, 0.1], 'String', {['optical wavelength: ' num2str(lambda*1e9) ' nm']...
+    ['SLM pixels: ' num2str(Nact)]...
+    ['Center acoustic frequency: ' num2str(fUS*1e-6) ' MHz']...
+    ['Numerical aperture of the transducer: ' num2str(NAUS)]...
+    })
 
 MoptVal=max(optVal);
 MpeakVal=max(peakVal);
 
 subplot(2,2,[3,4]), plot(MoptVal/MoptVal(2))
+xlabel('Steps')
+ylabel('Enhancement factor')
+
 hold on
 plot(MpeakVal/MpeakVal(2))
-for k = 1:n_step/Nact
-    plot([k*Nact k*Nact],ylim,'color',[0 0 0 .2])
-end
+% for k = 1:n_step/Nact
+%     plot([k*Nact k*Nact],ylim,'color',[0 0 0 .2])
+% end
 hold off
-legend({'Mean value in ROI (optimized)', 'Peak value in ROI'},'location','northwest')
 
 Ngrains = radius^2/(grainSize/2)^2; % there is probably a sqrt(2) because of definition of grain size
 EF_th = pi/4*Nact/Ngrains; % see Popoff 2011 NJP for pre-factor justification
-title(['Theoretical enhancement factor = ' num2str(EF_th)])
+% title(['Theoretical enhancement factor = ' num2str(EF_th)])
+hold on, plot(1:2*Nact,EF_th*ones(2*Nact,1),'--k'), hold off
+legend({'Mean value in ROI (optimized)', 'Peak value in ROI','Theoretical enhancement'},'location','northwest')
 
 
 %% Auxiliary functions
