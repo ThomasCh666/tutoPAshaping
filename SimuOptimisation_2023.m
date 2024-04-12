@@ -71,6 +71,11 @@ if squareFlag
     figure(1), imagesc(idx), axis image
 end
 
+% to mimic the exact sensitivity profile of a focused acoustic transducer,
+% one can refer to section 3.3 of the following book:
+% Kino, G. S. (1987). Acoustic waves: devices, imaging, and analog signal processing.
+% --> follows (J1(x)/x)^2
+
 %% Optimisation
 
 n_med=1;
