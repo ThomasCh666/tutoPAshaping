@@ -4,7 +4,7 @@ This repository contains a Matlab code that simulates the optimisation of the me
 
 It is part of the tutorial paper [Optical wavefront shaping in deep tissue using photoacoustic feedback](http://iopscience.iop.org/article/10.1088/2515-7647/ad82c1), by Fei Xia, Ivo Leite, Robert Prevedel and Thomas Chaigne. 
 
-DOI: 10.5281/zenodo.17713064
+[![Repository DOI](https://zenodo.org/badge/723032601.svg)](https://doi.org/10.5281/zenodo.17713063)
 
 The simulated physical configuration is the following: 
 
