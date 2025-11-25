@@ -2,7 +2,9 @@
 
 This repository contains a Matlab code that simulates the optimisation of the mean light intensity within a given region of interest.
 
-It is part of the tutorial paper [Optical wavefront shaping in deep tissue using photoacoustic feedback](https://arxiv.org/abs/2407.04628), by Fei Xia, Ivo Leite, Robert Prevedel and Thomas Chaigne. 
+It is part of the tutorial paper [Optical wavefront shaping in deep tissue using photoacoustic feedback](http://iopscience.iop.org/article/10.1088/2515-7647/ad82c1), by Fei Xia, Ivo Leite, Robert Prevedel and Thomas Chaigne. 
+
+DOI: 10.5281/zenodo.17713064
 
 The simulated physical configuration is the following: 
 
